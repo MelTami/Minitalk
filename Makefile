@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mvavasso <mvavasso@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: mvavasso <mvavasso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/08 15:55:52 by mvavasso          #+#    #+#              #
-#    Updated: 2022/11/08 15:57:23 by mvavasso         ###   ########.fr        #
+#    Updated: 2022/11/18 14:17:10 by mvavasso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ PATH_OBJS		= ./objects/
 PATH_SRCS		= ./sources/
 PATH_LIBFT		= ./libft
 
-SRCS			= $(addprefix $(PATH_SRCS), \
+SRCS_CLIENT		= $(addprefix $(PATH_SRCS), \
+					)
+SRCS_SV			= $(addprefix $(PATH_SRCS), \
 					)
 LFLAGS			= -L $(PATH_LIBFT) -lft
 OBJS 			= $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))
