@@ -3,15 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mvavasso <mvavasso@student.42.fr>          +#+  +:+       +#+         #
+#    By: mvavasso <mvavasso@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/08 15:55:52 by mvavasso          #+#    #+#              #
-#    Updated: 2022/11/18 14:17:10 by mvavasso         ###   ########.fr        #
+#    Updated: 2022/11/18 14:57:13 by mvavasso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_SV			= server
-NAME_CLIENT		= client
+NAME			= minitalk
+
+SV				= server
+CLIENT			= client
 
 CFLAGS			= -Wall -Werror -Wextra
 
@@ -27,20 +29,20 @@ SRCS_CLIENT		= $(addprefix $(PATH_SRCS), \
 SRCS_SV			= $(addprefix $(PATH_SRCS), \
 					)
 LFLAGS			= -L $(PATH_LIBFT) -lft
-OBJS 			= $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))
+OBJS_CLIENT		= $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS_CLIENT))
+OBJS_SV			= $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS_SV))
 INCLUDES		= -I $(PATH_INCLUDES)
-MLXFLAGS		= -lmlx -lXext -lX11 -lm -lz
 
 all:	$(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(SV) $(CLIENT)
 	@ make -C $(PATH_LIBFT)
-	@ clang $(CFLAGS) $(OBJS) $(LFLAGS) $(MLXFLAGS) -o $(NAME)
+	@ cc $(CFLAGS) $(OBJS) $(LFLAGS) -o $(CLIENT)
 	@ echo -e '\033[0;32m[SUCCESS]\033[0m Compilation done!'
 
 $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 	@ mkdir -p $(PATH_OBJS)
-	@ clang $(CFLAGS) $(INCLUDES) -I mlx.h -O3 -c $< -o $@
+	@ cc $(CFLAGS) $(INCLUDES) -c $< -o $@
 	
 clean:
 	@ $(RM) $(PATH_OBJS)
